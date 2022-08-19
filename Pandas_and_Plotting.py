@@ -45,9 +45,36 @@ occup_num_max = occup_rep.idxmax()
 
 # f) Plotting
 
-sorted_occup_rep = sorted(occup_rep)
-FigureB = occup_rep.plot.bar()
+occup_sort = occup_rep.sort_index()
+figure2 = occup_sort.plot.bar(x='Occupation')
 
-# Sorry, I don't have this one
+
+# Sorry, I don't have the axes names and the saved file in 2f)
 
 ## Exercise 3
+
+# a) Loading, Changing Column Names
+
+FNAME2 = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+iris = pandas.read_csv(FNAME2, sep=',')
+
+iris.columns = ["sepal length (in cm)", "sepal width (in cm)", "petal length (in cm)", "petal width (in cm)", "class"]
+
+# b) Setting up values to missing
+
+iris.loc[10:29, "petal length (in cm)"] = "NaN"
+
+# c) Replacing missing values
+
+iris["petal length (in cm)"] = iris["petal length (in cm)"].replace(["NaN"],1.0)
+
+# d) Saving CSV
+
+iris.to_csv("output/iris.csv")
+
+# e) Plotting
+
+iris.plot.scatter(x="class", y="sepal length (in cm)")
+
+# Sorry, I don't have multiple plots
+
