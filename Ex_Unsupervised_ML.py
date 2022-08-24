@@ -5,10 +5,10 @@
 import pandas as pd
 import seaborn as sns
 import sklearn.datasets
+from sklearn.datasets import load_breast_cancer, fetch_california_housing
 
-
-breastcancer = sklearn.datasets.load_breast_cancer()
-x = breastcancer["data"]
+housing = sklearn.datasets.fetch_california_housing()
+x = housing["data"]
 
 # b) Polynomial Features
 
@@ -16,15 +16,15 @@ from sklearn.preprocessing import PolynomialFeatures
 
 poly = PolynomialFeatures(degree=2, include_bias=False)
 new_x = poly.fit_transform(x)
-new_names = poly.get_feature_names(breastcancer["feature_names"])
+new_names = poly.get_feature_names(housing["feature_names"])
 
 poly.n_output_features_
-# There are 495 features now.
+# There are 44 features now.
 
 # c) Data Frame
 
 df = pd.DataFrame(new_x, columns = new_names)
-df["y"] = breastcancer["target"]
+df["y"] = housing["target"]
 df.to_csv("output/polynomials.csv")
 
 # 2. Principal Component Analysis
