@@ -46,7 +46,7 @@ scaler = StandardScaler()
 scaler.fit(olymp)
 olymp_scaled = pd.DataFrame(scaler.transform(olymp))
 
-olymp_scaled.var()
+print(olymp_scaled.var())
 
 # c) PCA Method
 
@@ -56,17 +56,17 @@ olymp_components = pd.DataFrame(pca.components_, columns=olymp.columns)
 
 # Most prominent loading:
 # On the first component, 100m sprint, 400m run, and 110m hurdles load the best.
-# On the second component, discus throw, shot put, and 1.500m run load the best.
-# On the third component, high jump, running long, and 100m sprint load the best.
+# On the second component, discus throw, "poid", and 1.500m run load the best.
+# On the third component, "haut", 100m sprint load the best, and javelin load the best.
 # The interpretation could be the following: the first component could reflect speed, the second accuracy, and
-# the third height.
+# the third height (or similar skills that attribute to the athlete's performance).
 
 # d) Variation
 pca.explained_variance_ratio_
 df_var = pd.DataFrame(pca.explained_variance_ratio_)
 df_var_cumul = df_var.cumsum()
 
-# We need at least 7 components to explain 90% variation of the data
+# We need at least 7 components to explain 90% variation of the data.
 
 # 3. Clustering
 
