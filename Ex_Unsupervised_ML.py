@@ -46,6 +46,7 @@ scaler = StandardScaler()
 scaler.fit(olymp)
 olymp_scaled = pd.DataFrame(scaler.transform(olymp))
 
+# Checking the unit variance:
 print(olymp_scaled.var())
 
 # c) PCA Method
@@ -73,7 +74,7 @@ df_var_cumul = df_var.cumsum()
 # a) Loading
 
 iris = sklearn.datasets.load_iris()
-x2 = pd.DataFrame(iris["data"])
+x2 = pd.DataFrame(iris["data"], columns=iris["feature_names"])
 
 # b) Scaling
 
@@ -116,8 +117,8 @@ print(silhouette_score(x2_scaled, dbscan.labels_))
 
 # e) Adding Variables
 
-combined["sepal width"] = x2[1]
-combined["petal length"] = x2[2]
+combined["sepal width"] = x2["sepal width (cm)"]
+combined["petal length"] = x2["petal length (cm)"]
 
 # f) Renaming Noise Assignments
 
@@ -127,7 +128,7 @@ combined["dbscan"] = combined["dbscan"].replace(-1, "Noise")
 
 id_vars = ["sepal width", "petal length"]
 value_vars = ["kmeans", "agg", "dbscan"]
-melted = combined.melt (id_vars=id_vars, value_vars=value_vars)
+melted = combined.melt(id_vars=id_vars, value_vars=value_vars)
 figure = sns.relplot(x="sepal width", y="petal length", data=melted, hue="value", col="variable")
 figure.savefig("output/cluster_petal.pdf")
 
