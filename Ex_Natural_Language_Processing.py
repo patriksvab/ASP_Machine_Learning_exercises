@@ -73,7 +73,6 @@ array_dendro = loaded_matrix.toarray()
 Z = sch.linkage(array_dendro, method="complete", metric="cosine")
 
 # c) Saving Dendrogram
-# Check the threshold
 
 plt.figure()
 sch.dendrogram(Z, color_threshold=0.85, no_labels=True)
@@ -159,5 +158,7 @@ for i in range(0, len(df_count.columns)):
     col = df_count.columns[i]
     sort = df_count[col].sort_values(ascending=False).iloc[0:10]
     top_words_by_decade[col] = sort.index
+
+# The most often used terms by decade
 
 print(top_words_by_decade)
